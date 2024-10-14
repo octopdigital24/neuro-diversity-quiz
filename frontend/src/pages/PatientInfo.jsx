@@ -58,9 +58,8 @@ const PatientInfo = ({ patientData, setPatientData, setHasStarted }) => {
             className={`w-full p-2 focus:outline-blue-500 ${
               errors.name ? "border-red-600" : "border-gray-300"
             } rounded`}
-            required
           />
-          {errors.name && <p className="text-red-600">{errors.name}</p>}
+          {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>}
         </div>
 
         <div className="mb-4">
@@ -77,9 +76,10 @@ const PatientInfo = ({ patientData, setPatientData, setHasStarted }) => {
             className={`w-full p-2  focus:outline-blue-500 ${
               errors.email ? "border-red-600" : "border-gray-300"
             } rounded`}
-            required
           />
-          {errors.email && <p className="text-red-600">{errors.email}</p>}
+          {errors.email && (
+            <p className="text-red-600 text-sm">{errors.email}</p>
+          )}
         </div>
 
         <button
