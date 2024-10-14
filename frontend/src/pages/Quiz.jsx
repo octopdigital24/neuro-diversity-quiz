@@ -146,11 +146,25 @@ const Quiz = () => {
                               } // Update response state
                               required
                             />
-                            {value === 0 && "Not at all"}
-                            {value === 1 && "Sometimes"}
-                            {value === 2 && "On Occasion"}
-                            {value === 3 && "Most of the time"}
-                            {value === 4 && "All the time"}
+                            {question.question_id <= 30 ? (
+                              <>
+                                {" "}
+                                {value === 0 && "Not at all"}
+                                {value === 1 && "Sometimes"}
+                                {value === 2 && "On Occasion"}
+                                {value === 3 && "Most of the time"}
+                                {value === 4 && "All the time"}
+                              </>
+                            ) : (
+                              <>
+                                {value === 0 && "No One"}
+                                {value === 1 && "One or Two"}
+                                {value === 2 && "Some Individuals"}
+                                {value === 3 && "A Small Group of Individuals"}
+                                {value === 4 && "Many Individuals"}
+                                {value === 4 && "Almost Everyone"}
+                              </>
+                            )}
                           </label>
                         ))}
                       </div>
