@@ -38,7 +38,10 @@ const PatientInfo = ({ patientData, setPatientData, setHasStarted }) => {
   };
 
   return (
-    <div className="f shadow-md my-auto bg-gray-100 p-5 md:p-8 lg:p-16 max-w-3xl mx-auto">
+    <div className="f shadow-md my-auto bg-gray-100 p-5 md:p-8 lg:p-16 lg:py-10 max-w-3xl mx-auto rounded-lg">
+      <h1 className="text-4xl font-bold text-[#1D126C] bg-gray-100 mb-10 max-w-3xl mx-auto  text-center">
+        Neurodivergent Workplace Inclusion Test
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block mb-1" htmlFor="name">
@@ -49,8 +52,9 @@ const PatientInfo = ({ patientData, setPatientData, setHasStarted }) => {
             id="name"
             name="name"
             value={patientData.name}
+            placeholder="Enter your name"
             onChange={handleChange}
-            className={`w-full p-2 border ${
+            className={`w-full p-2 border focus:outline-blue-500 ${
               errors.name ? "border-red-600" : "border-gray-300"
             } rounded`}
             required
@@ -67,8 +71,9 @@ const PatientInfo = ({ patientData, setPatientData, setHasStarted }) => {
             id="email"
             name="email"
             value={patientData.email}
+            placeholder="Enter your email address"
             onChange={handleChange}
-            className={`w-full p-2 border ${
+            className={`w-full p-2 border focus:outline-blue-500 ${
               errors.email ? "border-red-600" : "border-gray-300"
             } rounded`}
             required

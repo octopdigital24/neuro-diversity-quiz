@@ -63,9 +63,6 @@ const Quiz = () => {
       <div>
         {!hasStarted && !patientData.name && !patientData.email ? (
           <div>
-            <h1 className="text-4xl font-bold text-[#1D126C] bg-gray-100 p-5 md:p-8 lg:px-16 max-w-3xl mx-auto ">
-              Neurodivergent Workplace Inclusion Test
-            </h1>
             <PatientInfo
               patientData={patientData}
               setPatientData={setPatientData}
@@ -73,7 +70,7 @@ const Quiz = () => {
             />
           </div>
         ) : (
-          <div className="bg-gray-100 p-5 md:p-8 lg:p-16 max-w-3xl mx-auto">
+          <div className="bg-gray-100 p-5 md:p-8 lg:p-16 max-w-3xl mx-auto rounded-lg">
             {questions.length === 0 ? (
               <p>Loading questions...</p>
             ) : (
