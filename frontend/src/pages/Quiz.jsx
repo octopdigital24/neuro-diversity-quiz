@@ -20,7 +20,7 @@ const Quiz = () => {
 
   // Load questions from the Express server
   useEffect(() => {
-    fetch("http://localhost:5000/quiz-data") // Ensure this matches your Express endpoint
+    fetch("http://localhost:5005/quiz-data") // Ensure this matches your Express endpoint
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
