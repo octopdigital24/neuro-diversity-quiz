@@ -74,14 +74,19 @@ const Quiz = () => {
             {questions.length === 0 ? (
               <p>Loading questions...</p>
             ) : (
-              <div className="space-y-5 ">
+              <div className="space-y-12   ">
+                <h1 className="text-2xl font-bold text-[#1D126C]    text-center  mb-10">
+                  Neurodivergent Workplace Inclusion Test
+                </h1>
                 {questions[0].sections.map((section, sectionIndex) => (
-                  <div key={sectionIndex} className="  p-4 rounded-md border">
-                    <h2 className="text-2xl font-bold mb-2">{section.name}</h2>
+                  <div key={sectionIndex} className="p-4 rounded-md border">
+                    <p className="text-2xl font-bold -mt-8  z-10 bg-white flex justify-start w-fit ">
+                      {section.name}
+                    </p>
                     {section.questions.map((question, questionIndex) => (
                       <div
                         key={question._id}
-                        className="mb-4 last:mb-0 bg-gray-100 p-4 rounded-lg"
+                        className="mb-4 mt-2 last:mb-0 bg-gray-100 p-4 rounded-lg"
                       >
                         <h4 className="text-lg font-medium mb-2">
                           {questionIndex + 1}. {question.question}
