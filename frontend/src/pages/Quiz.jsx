@@ -59,7 +59,7 @@ const Quiz = () => {
   };
 
   return (
-    <div className="">
+    <div className="pb-16">
       <div>
         {!hasStarted && !patientData.name && !patientData.email ? (
           <div>
@@ -70,53 +70,58 @@ const Quiz = () => {
             />
           </div>
         ) : (
-          <div className="bg-gray-100 p-5 md:p-8 lg:p-16 max-w-3xl mx-auto rounded-lg">
+          <div className=" max-w-screen-sm mx-auto  ">
             {questions.length === 0 ? (
               <p>Loading questions...</p>
             ) : (
-              questions[0].sections.map((section, sectionIndex) => (
-                <div key={sectionIndex} className="mb-8">
-                  <h2 className="text-2xl font-bold -ml-6 mb-2">
-                    {section.name}
-                  </h2>
-                  {section.questions.map((question, questionIndex) => (
-                    <div key={question._id} className="mb-4">
-                      <h4 className="text-lg font-medium">
-                        {questionIndex + 1}. {question.question}
-                      </h4>
-                      <div className="grid  grid-cols-1">
-                        {/* Radio buttons for each answer option */}
-                        {[0, 1, 2, 3, 4].map((value) => (
-                          <label key={value} className="flex gap-2">
-                            <input
-                              type="radio"
-                              name={`question_${question.id}`} // Group radio buttons by question ID
-                              value={value}
-                              checked={responses[question.id] === value}
-                              onChange={() =>
-                                handleResponseChange(question.id, value)
-                              } // Update response state
-                              required
-                            />
-                            {value === 0 && "Not at all"}
-                            {value === 1 && "Sometimes"}
-                            {value === 2 && "On Occasion"}
-                            {value === 3 && "Most of the time"}
-                            {value === 4 && "All the time"}
-                          </label>
-                        ))}
+              <div className="space-y-5 ">
+                {questions[0].sections.map((section, sectionIndex) => (
+                  <div key={sectionIndex} className="  p-4 rounded-md border">
+                    <h2 className="text-2xl font-bold mb-2">{section.name}</h2>
+                    {section.questions.map((question, questionIndex) => (
+                      <div
+                        key={question._id}
+                        className="mb-4 last:mb-0 bg-gray-100 p-4 rounded-lg"
+                      >
+                        <h4 className="text-lg font-medium mb-2">
+                          {questionIndex + 1}. {question.question}
+                        </h4>
+                        <div className="grid  grid-cols-1 gap-1 pl-4">
+                          {/* Radio buttons for each answer option */}
+                          {[0, 1, 2, 3, 4].map((value) => (
+                            <label key={value} className="flex gap-2">
+                              <input
+                                type="radio"
+                                name={`question_${question.id}`} // Group radio buttons by question ID
+                                value={value}
+                                checked={responses[question.id] === value}
+                                onChange={() =>
+                                  handleResponseChange(question.id, value)
+                                } // Update response state
+                                required
+                              />
+                              {value === 0 && "Not at all"}
+                              {value === 1 && "Sometimes"}
+                              {value === 2 && "On Occasion"}
+                              {value === 3 && "Most of the time"}
+                              {value === 4 && "All the time"}
+                            </label>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ))
+                    ))}
+                  </div>
+                ))}
+              </div>
             )}
-            <button
-              onClick={calculateScore}
-              className="p-3 mx-auto  bg-blue-600 hover:bg-blue-700 transition-colors duration-200 rounded-md text-white min-w-32 "
-            >
-              Submit
-            </button>
+            <div className="w-full flex justify-end">
+              <button
+                onClick={calculateScore}
+                className="p-3  mt-4 bg-blue-600 hover:bg-blue-700 transition-colors duration-200 rounded-md text-white min-w-32 "
+              >
+                Submit
+              </button>
+            </div>
           </div>
         )}
       </div>
