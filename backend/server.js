@@ -33,8 +33,27 @@ const Quiz = mongoose.model("Quiz", quizSchema);
 // Endpoint to get quiz data
 app.get("/quiz-data", async (req, res) => {
   try {
-    const quizData = await Quiz.find(); // Fetch all quiz data from the database
-    res.json(quizData);
+    const quizData = await Quiz.find().lean(); // Fetch all quiz data as plain JS objects
+
+    let id = 1;
+
+    // Iterate over each quiz in the array (assuming quizData is an array of quizzes)
+    quizData.forEach((quiz) => {
+      // Ensure quiz has sections
+      if (quiz.sections && quiz.sections.length > 0) {
+        quiz.sections.forEach((section) => {
+          // Ensure section has questions
+          if (section.questions && section.questions.length > 0) {
+            section.questions.forEach((question) => {
+              question.question_id = id++; // Assign incremental question_id
+            });
+          }
+        });
+      }
+    });
+
+    console.log("Updated quizData: ", JSON.stringify(quizData));
+    res.json(quizData); // Send modified quiz data with updated question_id
   } catch (error) {
     console.error("Error fetching quiz data:", error);
     res.status(500).json({ error: "Failed to load quiz data" });
