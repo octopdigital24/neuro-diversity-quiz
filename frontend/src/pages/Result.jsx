@@ -167,6 +167,162 @@ const Result = ({ score, handleReset }) => {
           Try Again
         </button>
       </div>
+
+      {/* Graph Section */}
+      <div className="py-16 max-w-screen-lg mx-auto">
+        <div className="py-16 max-w-screen-lg mx-auto space-y-16">
+          <div className="grid grid-cols-1 gap-4">
+            {/* Social Inclusion section */}
+            <div>
+              <p className="text-xl font-semibold mb-4 ">Social Inclusion</p>
+
+              {/* Graph container */}
+              <div className="grid grid-cols-6 items-center gap-4">
+                {/* Labels */}
+                <div className="col-span-1">
+                  <p className="text-right">Expressed</p>
+                </div>
+
+                {/* Expressed Bar */}
+                <div className="col-span-5">
+                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-orange-500"
+                      style={{ width: `${score.EI}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Wanted Section */}
+              <div className="grid grid-cols-6 items-center gap-4 mt-4">
+                {/* Labels */}
+                <div className="col-span-1">
+                  <p className="text-right">Wanted</p>
+                </div>
+
+                {/* Wanted Bar */}
+                <div className="col-span-5">
+                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-blue-500"
+                      style={{ width: `${score.WI}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            {/* Decision Making section */}
+            <div>
+              <p className="text-xl font-semibold mb-4">Decision Making</p>
+
+              {/* Graph container */}
+              <div className="grid grid-cols-6 items-center gap-4">
+                {/* Labels */}
+                <div className="col-span-1">
+                  <p className="text-right">Expressed</p>
+                </div>
+
+                {/* Expressed Bar */}
+                <div className="col-span-5">
+                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-orange-500"
+                      style={{ width: `${score.EC}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Wanted Section */}
+              <div className="grid grid-cols-6 items-center gap-4 mt-4">
+                {/* Labels */}
+                <div className="col-span-1">
+                  <p className="text-right">Wanted</p>
+                </div>
+
+                {/* Wanted Bar */}
+                <div className="col-span-5">
+                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-blue-500"
+                      style={{ width: `${score.WC}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            {/* Acceptance section */}
+            <div>
+              <p className="text-xl font-semibold mb-4">Acceptance</p>
+
+              {/* Graph container */}
+              <div className="grid grid-cols-6 items-center gap-4">
+                {/* Labels */}
+                <div className="col-span-1">
+                  <p className="text-right">Expressed</p>
+                </div>
+
+                {/* Expressed Bar */}
+                <div className="col-span-5">
+                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-orange-500"
+                      style={{ width: `${score.EA}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Wanted Section */}
+              <div className="grid grid-cols-6 items-center gap-4 mt-4">
+                {/* Labels */}
+                <div className="col-span-1">
+                  <p className="text-right">Wanted</p>
+                </div>
+
+                {/* Wanted Bar */}
+                <div className="col-span-5">
+                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-blue-500"
+                      style={{ width: `${score.WA}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            {/* Sensory Impact section */}
+            <div>
+              <p className="text-xl font-semibold mb-4">Sensory Impact</p>
+
+              {/* Graph container */}
+              <div className="grid grid-cols-6 items-center gap-4">
+                {/* Labels */}
+                <div className="col-span-1">
+                  <p className="text-right">Sensory Impact</p>
+                </div>
+
+                {/* Expressed Bar */}
+                <div className="col-span-5">
+                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-orange-500"
+                      style={{ width: `${score.EA}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
