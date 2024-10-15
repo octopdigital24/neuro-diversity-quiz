@@ -133,7 +133,7 @@ const Result = ({ score, handleReset }) => {
             </div>
 
             <div className="border rounded-lg overflow-hidden">
-              <p className="bg-orange-500 text-white p-3 text-center">
+              <p className="bg-yellow-500 text-white p-3 text-center">
                 Overall
               </p>
               <p className="p-6 text-center text-xl font-medium">
@@ -148,7 +148,7 @@ const Result = ({ score, handleReset }) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-end my-10 max-w-screen-lg  mx-auto">
+      <div className="w-full flex justify-between my-10 max-w-screen-lg  mx-auto">
         <div className="w-60">
           <p className="uppercase text-center text-orange-500 font-bold">
             Sensory Impact
@@ -160,11 +160,9 @@ const Result = ({ score, handleReset }) => {
             <p className="p-6 text-center text-xl font-medium">{score.SI}</p>
           </div>
         </div>
-      </div>
-      <div className="flex justify-center my-4">
         <button
           onClick={handleReset}
-          className="bg-indigo-500 text-white px-4 py-2 rounded-md mx-auto"
+          className="bg-indigo-500 text-white px-4 py-2 rounded-md  h-12"
         >
           Try Again
         </button>
