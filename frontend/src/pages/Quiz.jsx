@@ -113,20 +113,20 @@ const Quiz = () => {
 
           // Map section name to corresponding score category
           switch (sectionName) {
-            case "Demographics": // Change this to your actual section name
-              newScore.EI += value; // Adjust based on your section mapping
+            case "Demographics":
+              newScore.EI += value;
               break;
-            case "Health History": // Change this to your actual section name
-              newScore.WI += value; // Adjust based on your section mapping
+            case "Health History":
+              newScore.WI += value;
               break;
-            case "Behavioral Health": // Change this to your actual section name
-              newScore.EC += value; // Adjust based on your section mapping
+            case "Behavioral Health":
+              newScore.EC += value;
               break;
-            case "Medical History": // Change this to your actual section name
-              newScore.WC += value; // Adjust based on your section mapping
+            case "Medical History":
+              newScore.WC += value;
               break;
-            case "Family Medical History": // Add additional sections as needed
-              newScore.EA += value; // Adjust based on your section mapping
+            case "Family Medical History":
+              newScore.EA += value;
               break;
             case "Social History":
               newScore.WA += value;
@@ -142,11 +142,8 @@ const Quiz = () => {
       }
     });
 
-    console.log("Final Score:", newScore); // Log the final score for debugging
-
-    // Update the state with the calculated score
     setScore(newScore);
-    setShowResults(true); // Show results after calculation
+    setShowResults(true);
   };
 
   const answerAllQuestionsRandomly = () => {
