@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PatientInfo from "./PatientInfo";
 
 const Quiz = () => {
+  const nodeEnv = process.env.NODE_ENV;
   const [hasStarted, setHasStarted] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
@@ -37,8 +38,19 @@ const Quiz = () => {
   }, []);
 
   const handleResponseChange = (questionId, response) => {
-    setResponses({ ...responses, [questionId]: response });
-    setErrors({ ...errors, [questionId]: false }); // Clear error when the question is answered
+    console.log("Question ID:", questionId, "Response:", response); // Debugging log
+
+    // Update the responses state with the new response for the given questionId
+    setResponses((prevResponses) => ({
+      ...prevResponses,
+      [questionId]: response, // Set the response for this specific question
+    }));
+
+    // Clear the error state for this question since an answer has been provided
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [questionId]: false, // No error for this question anymore
+    }));
   };
 
   const validateResponses = () => {
@@ -48,8 +60,9 @@ const Quiz = () => {
     // Validate each question is answered
     questions[0].sections.forEach((section) => {
       section.questions.forEach((question) => {
-        if (responses[question.id] === undefined) {
-          newErrors[question.id] = true; // Mark as an error if not answered
+        console.log("question id", question.question_id);
+        if (responses[question.question_id] === undefined) {
+          newErrors[question.question_id] = true; // Mark as an error if not answered
           allValid = false;
         }
       });
@@ -60,27 +73,90 @@ const Quiz = () => {
   };
 
   const calculateScore = () => {
+    // Validate responses before calculating the score
     if (!validateResponses()) {
       alert("Please answer all questions before submitting.");
       return;
     }
 
-    const newScore = { EI: 0, WI: 0, EC: 0, WC: 0, EA: 0, WA: 0 };
+    // Initialize a score object for each section
+    const newScore = {
+      EI: 0,
+      WI: 0,
+      EC: 0,
+      WC: 0,
+      EA: 0,
+      WA: 0,
+      VA: 0,
+    };
 
-    for (const [id, response] of Object.entries(responses)) {
+    // Iterate through responses to calculate the score
+    Object.entries(responses).forEach(([key, value]) => {
+      console.log("Question ID:", key, "Response:", value);
+
+      // Find the question based on question_id
       const question = questions[0].sections
         .flatMap((section) => section.questions)
-        .find((q) => q.id === parseInt(id));
+        .find((q) => q.question_id === parseInt(key)); // Use question_id to find the correct question
 
       if (question) {
-        const category = question.category;
-        // Scoring logic based on response
-        newScore[category] += response; // Adjust this as needed based on your scoring logic
-      }
-    }
+        console.log("Found Question:", question);
 
+        // Determine the section of the found question
+        const section = questions[0].sections.find((sec) =>
+          sec.questions.some((q) => q.question_id === question.question_id)
+        );
+
+        if (section) {
+          // Determine the category based on section name
+          const sectionName = section.name;
+
+          // Map section name to corresponding score category
+          switch (sectionName) {
+            case "Demographics": // Change this to your actual section name
+              newScore.EI += value; // Adjust based on your section mapping
+              break;
+            case "Health History": // Change this to your actual section name
+              newScore.WI += value; // Adjust based on your section mapping
+              break;
+            case "Behavioral Health": // Change this to your actual section name
+              newScore.EC += value; // Adjust based on your section mapping
+              break;
+            case "Medical History": // Change this to your actual section name
+              newScore.WC += value; // Adjust based on your section mapping
+              break;
+            case "Family Medical History": // Add additional sections as needed
+              newScore.EA += value; // Adjust based on your section mapping
+              break;
+            case "Social History":
+              newScore.WA += value;
+              break;
+            case "Dietary Habits":
+              newScore.VA += value;
+            default:
+              console.warn(`Unrecognized section: ${sectionName}`);
+          }
+        }
+      } else {
+        console.log("Question not found for Question ID:", key);
+      }
+    });
+
+    console.log("Final Score:", newScore); // Log the final score for debugging
+
+    // Update the state with the calculated score
     setScore(newScore);
     setShowResults(true); // Show results after calculation
+  };
+
+  const answerAllQuestionsRandomly = () => {
+    questions[0].sections.map((section) => {
+      section.questions.map((question) => {
+        const randomAnswer = Math.floor(Math.random() * 5); // Generate a random integer from 0 to 4
+
+        handleResponseChange(question.question_id, randomAnswer); // Call the function to update responses
+      });
+    });
   };
 
   if (!hasStarted) {
@@ -94,6 +170,7 @@ const Quiz = () => {
       </div>
     );
   }
+  console.log("selected answers", responses);
 
   return (
     <div className="pb-16">
@@ -124,7 +201,7 @@ const Quiz = () => {
                   </p>
                   {section.questions.map((question, questionIndex) => (
                     <div
-                      key={question._id}
+                      key={question.question_id}
                       className={`mb-4 mt-2 last:mb-0 bg-gray-100 p-4 rounded-lg ${
                         errors[question.id] ? "border border-red-600" : ""
                       }`}
@@ -138,15 +215,20 @@ const Quiz = () => {
                           <label key={value} className="flex gap-2">
                             <input
                               type="radio"
-                              name={`question_${question.id}`} // Group radio buttons by question ID
+                              name={`question_${question.question_id}`} // Group radio buttons by question ID
                               value={value}
-                              checked={responses[question.id] === value}
+                              checked={
+                                responses[question.question_id] === value
+                              }
                               onChange={() =>
-                                handleResponseChange(question.id, value)
+                                handleResponseChange(
+                                  question.question_id,
+                                  value
+                                )
                               } // Update response state
                               required
                             />
-                            {question.question_id <= 30 ? (
+                            {questionIndex <= 30 ? (
                               <>
                                 {" "}
                                 {value === 0 && "Not at all"}
@@ -162,7 +244,7 @@ const Quiz = () => {
                                 {value === 2 && "Some Individuals"}
                                 {value === 3 && "A Small Group of Individuals"}
                                 {value === 4 && "Many Individuals"}
-                                {value === 4 && "Almost Everyone"}
+                                {value === 5 && "Almost Everyone"}
                               </>
                             )}
                           </label>
@@ -178,7 +260,16 @@ const Quiz = () => {
             </div>
           )}
           {!showResults && (
-            <div className="w-full flex justify-end">
+            <div className="w-full flex justify-end gap-2">
+              {nodeEnv === "development" && (
+                <button
+                  onClick={answerAllQuestionsRandomly}
+                  className="p-3 mt-4 bg-green-600 hover:bg-green-700 transition-colors duration-200 rounded-md text-white min-w-32"
+                >
+                  Answer all questions
+                </button>
+              )}
+
               <button
                 onClick={calculateScore}
                 className="p-3 mt-4 bg-blue-600 hover:bg-blue-700 transition-colors duration-200 rounded-md text-white min-w-32"
