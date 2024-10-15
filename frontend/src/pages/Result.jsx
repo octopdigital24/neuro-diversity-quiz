@@ -184,13 +184,14 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Expressed Bar */}
-                <div className="col-span-5">
-                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                <div className="col-span-5 flex items-center gap-2">
+                  <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-orange-500"
                       style={{ width: `${score.EI}%` }}
                     ></div>
                   </div>
+                  {score.EI}%
                 </div>
               </div>
 
@@ -202,13 +203,14 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Wanted Bar */}
-                <div className="col-span-5">
-                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                <div className="col-span-5 flex items-center gap-2">
+                  <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-blue-500"
                       style={{ width: `${score.WI}%` }}
                     ></div>
                   </div>
+                  {score.WI}%
                 </div>
               </div>
             </div>
@@ -226,13 +228,14 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Expressed Bar */}
-                <div className="col-span-5">
-                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                <div className="col-span-5 flex items-center gap-2">
+                  <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-orange-500"
                       style={{ width: `${score.EC}%` }}
                     ></div>
                   </div>
+                  {score.EC}%
                 </div>
               </div>
 
@@ -244,13 +247,14 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Wanted Bar */}
-                <div className="col-span-5">
-                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                <div className="col-span-5 flex items-center gap-2">
+                  <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-blue-500"
                       style={{ width: `${score.WC}%` }}
                     ></div>
                   </div>
+                  {score.WC}%
                 </div>
               </div>
             </div>
@@ -268,13 +272,14 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Expressed Bar */}
-                <div className="col-span-5">
-                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                <div className="col-span-5 flex items-center gap-2">
+                  <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-orange-500"
                       style={{ width: `${score.EA}%` }}
                     ></div>
                   </div>
+                  {score.EA}%
                 </div>
               </div>
 
@@ -286,13 +291,14 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Wanted Bar */}
-                <div className="col-span-5">
-                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                <div className="col-span-5 flex items-center gap-2">
+                  <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-blue-500"
                       style={{ width: `${score.WA}%` }}
                     ></div>
                   </div>
+                  {score.WA}%
                 </div>
               </div>
             </div>
@@ -310,13 +316,14 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Expressed Bar */}
-                <div className="col-span-5">
-                  <div className="relative h-10 bg-gray-200 rounded overflow-hidden">
+                <div className="col-span-5 flex items-center gap-2">
+                  <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-orange-500"
                       style={{ width: `${score.EA}%` }}
                     ></div>
                   </div>
+                  {score.EA}%
                 </div>
               </div>
             </div>
