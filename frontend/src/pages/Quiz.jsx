@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PatientInfo from "./PatientInfo";
+import Result from "./Result";
 
 const Quiz = () => {
   const nodeEnv = process.env.NODE_ENV;
@@ -87,7 +88,7 @@ const Quiz = () => {
       WC: 0,
       EA: 0,
       WA: 0,
-      VA: 0,
+      SI: 0,
     };
 
     // Iterate through responses to calculate the score
@@ -132,7 +133,7 @@ const Quiz = () => {
               newScore.WA += value;
               break;
             case "Dietary Habits":
-              newScore.VA += value;
+              newScore.SI += value;
             default:
               console.warn(`Unrecognized section: ${sectionName}`);
           }
@@ -156,6 +157,20 @@ const Quiz = () => {
     });
   };
 
+  const handleReset = () => {
+    setShowResults(false);
+    setResponses({});
+    setScore({
+      EI: 0,
+      WI: 0,
+      EC: 0,
+      WC: 0,
+      EA: 0,
+      WA: 0,
+      SI: 0,
+    });
+  };
+
   if (!hasStarted) {
     return (
       <div>
@@ -167,24 +182,13 @@ const Quiz = () => {
       </div>
     );
   }
-  console.log("selected answers", responses);
+  if (showResults) return <Result score={score} handleReset={handleReset} />;
 
   return (
     <div className="pb-16">
       <div>
         <div className="max-w-screen-sm mx-auto">
-          {showResults ? (
-            <div className="space-y-8">
-              <h2 className="text-2xl font-bold text-center">Your Scores</h2>
-              <ul className="list-none text-lg">
-                {Object.entries(score).map(([key, value]) => (
-                  <li key={key}>
-                    <strong>{key}:</strong> {value}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : questions.length === 0 ? (
+          {questions.length === 0 ? (
             <p>Loading questions...</p>
           ) : (
             <div className="space-y-12">
@@ -208,45 +212,59 @@ const Quiz = () => {
                       </h4>
                       <div className="grid grid-cols-1 gap-1 pl-4">
                         {/* Radio buttons for each answer option */}
-                        {[0, 1, 2, 3, 4].map((value) => (
-                          <label key={value} className="flex gap-2">
-                            <input
-                              type="radio"
-                              name={`question_${question.question_id}`} // Group radio buttons by question ID
-                              value={value}
-                              checked={
-                                responses[question.question_id] === value
-                              }
-                              onChange={() =>
-                                handleResponseChange(
-                                  question.question_id,
-                                  value
-                                )
-                              } // Update response state
-                              required
-                            />
-                            {questionIndex <= 30 ? (
-                              <>
-                                {" "}
+                        {question.question_id <= 30
+                          ? // For questions with question_id <= 30
+                            [0, 1, 2, 3, 4].map((value) => (
+                              <label key={value} className="flex gap-2">
+                                <input
+                                  type="radio"
+                                  name={`question_${question.question_id}`} // Group radio buttons by question ID
+                                  value={value}
+                                  checked={
+                                    responses[question.question_id] === value
+                                  }
+                                  onChange={() =>
+                                    handleResponseChange(
+                                      question.question_id,
+                                      value
+                                    )
+                                  }
+                                  required
+                                />
                                 {value === 0 && "Not at all"}
                                 {value === 1 && "Sometimes"}
                                 {value === 2 && "On Occasion"}
                                 {value === 3 && "Most of the time"}
                                 {value === 4 && "All the time"}
-                              </>
-                            ) : (
-                              <>
+                              </label>
+                            ))
+                          : // For questions with question_id > 30 (Five options)
+                            [0, 1, 2, 3, 4].map((value) => (
+                              <label key={value} className="flex gap-2">
+                                <input
+                                  type="radio"
+                                  name={`question_${question.question_id}`} // Group radio buttons by question ID
+                                  value={value}
+                                  checked={
+                                    responses[question.question_id] === value
+                                  }
+                                  onChange={() =>
+                                    handleResponseChange(
+                                      question.question_id,
+                                      value
+                                    )
+                                  }
+                                  required
+                                />
                                 {value === 0 && "No One"}
                                 {value === 1 && "One or Two"}
                                 {value === 2 && "Some Individuals"}
                                 {value === 3 && "A Small Group of Individuals"}
                                 {value === 4 && "Many Individuals"}
-                                {value === 5 && "Almost Everyone"}
-                              </>
-                            )}
-                          </label>
-                        ))}
+                              </label>
+                            ))}
                       </div>
+
                       {errors[question.id] && (
                         <p className="text-red-600">Please select an answer.</p>
                       )}
