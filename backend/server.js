@@ -13,10 +13,7 @@ app.use(express.json());
 const mongoURI =
   "mongodb+srv://amdadul-octopi:zWBCqbZwf42mzosM@cluster0.ysgtnmf.mongodb.net/neuro-diversity-quiz?retryWrites=true&w=majority&appName=Cluster0"; // Change the URI as needed
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoURI, {})
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -27,8 +24,27 @@ const quizSchema = new mongoose.Schema({
   category: { type: String, required: true },
 });
 
+// Define Mongoose schema for User Results
+const userResultSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  score: {
+    EI: { type: Number, default: 0 },
+    WI: { type: Number, default: 0 },
+    EC: { type: Number, default: 0 },
+    WC: { type: Number, default: 0 },
+    EA: { type: Number, default: 0 },
+    WA: { type: Number, default: 0 },
+    SI: { type: Number, default: 0 },
+  },
+  createdAt: { type: Date, default: Date.now },
+});
+
 // Create a Mongoose model
 const Quiz = mongoose.model("Quiz", quizSchema);
+
+// create a Mongoose model
+const UserResult = mongoose.model("UserResult", userResultSchema);
 
 // Endpoint to get quiz data
 app.get("/quiz-data", async (req, res) => {
@@ -57,6 +73,41 @@ app.get("/quiz-data", async (req, res) => {
   } catch (error) {
     console.error("Error fetching quiz data:", error);
     res.status(500).json({ error: "Failed to load quiz data" });
+  }
+});
+
+// Endpoint to add or update user score
+app.post("/user-score", async (req, res) => {
+  const { name, email, score } = req.body;
+
+  if (!name || !email || !score) {
+    return res
+      .status(400)
+      .json({ error: "Name, email, and score are required" });
+  }
+
+  try {
+    // Find the user by email
+    let userResult = await UserResult.findOne({ email });
+
+    if (userResult) {
+      // Update existing user score
+      userResult.score = score;
+      await userResult.save();
+      res.json({ message: "Score updated successfully", userResult });
+    } else {
+      // Create a new user with the given score
+      const newUserResult = new UserResult({
+        name,
+        email,
+        score,
+      });
+      await newUserResult.save();
+      res.json({ message: "Score added successfully", newUserResult });
+    }
+  } catch (error) {
+    console.error("Error saving user score:", error);
+    res.status(500).json({ error: "Failed to save user score" });
   }
 });
 

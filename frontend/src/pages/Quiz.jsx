@@ -19,8 +19,10 @@ const Quiz = () => {
     WC: 0,
     EA: 0,
     WA: 0,
+    SI: 0,
   });
   const [showResults, setShowResults] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // Load questions from the Express server
   useEffect(() => {
@@ -32,15 +34,12 @@ const Quiz = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data); // Log the fetched data for debugging
         setQuestions(data); // Assuming the API returns an array of questions
       })
       .catch((error) => console.error("Error fetching quiz data:", error));
   }, []);
 
   const handleResponseChange = (questionId, response) => {
-    console.log("Question ID:", questionId, "Response:", response); // Debugging log
-
     // Update the responses state with the new response for the given questionId
     setResponses((prevResponses) => ({
       ...prevResponses,
@@ -61,7 +60,6 @@ const Quiz = () => {
     // Validate each question is answered
     questions[0].sections.forEach((section) => {
       section.questions.forEach((question) => {
-        console.log("question id", question.question_id);
         if (responses[question.question_id] === undefined) {
           newErrors[question.question_id] = true; // Mark as an error if not answered
           allValid = false;
@@ -93,16 +91,12 @@ const Quiz = () => {
 
     // Iterate through responses to calculate the score
     Object.entries(responses).forEach(([key, value]) => {
-      console.log("Question ID:", key, "Response:", value);
-
       // Find the question based on question_id
       const question = questions[0].sections
         .flatMap((section) => section.questions)
         .find((q) => q.question_id === parseInt(key)); // Use question_id to find the correct question
 
       if (question) {
-        console.log("Found Question:", question);
-
         // Determine the section of the found question
         const section = questions[0].sections.find((sec) =>
           sec.questions.some((q) => q.question_id === question.question_id)
@@ -144,7 +138,33 @@ const Quiz = () => {
     });
 
     setScore(newScore);
-    setShowResults(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    calculateScore();
+    try {
+      console.log("Triggered");
+      setSubmitting(true);
+      const response = await fetch("http://localhost:5005/user-score", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: patientData.name,
+          email: patientData.email,
+          score,
+        }),
+      });
+      if (response.status === 200) {
+        setShowResults(true);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const answerAllQuestionsRandomly = () => {
@@ -286,10 +306,12 @@ const Quiz = () => {
               )}
 
               <button
-                onClick={calculateScore}
-                className="p-3 mt-4 bg-blue-600 hover:bg-blue-700 transition-colors duration-200 rounded-md text-white min-w-32"
+                onClick={handleSubmit}
+                className={`p-3 mt-4 bg-blue-600 hover:bg-blue-700 transition-colors duration-200 rounded-md text-white min-w-32 ${
+                  submitting ? "bg-opacity-50" : ""
+                }`}
               >
-                Submit
+                {submitting ? "Submitting..." : "Submit"}
               </button>
             </div>
           )}
