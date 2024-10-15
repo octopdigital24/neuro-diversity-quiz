@@ -180,7 +180,7 @@ const Result = ({ score, handleReset }) => {
               <div className="grid grid-cols-6 items-center gap-4">
                 {/* Labels */}
                 <div className="col-span-1">
-                  <p className="text-right">Expressed</p>
+                  <p className="text-right opacity-60">Expressed</p>
                 </div>
 
                 {/* Expressed Bar */}
@@ -198,7 +198,7 @@ const Result = ({ score, handleReset }) => {
               <div className="grid grid-cols-6 items-center gap-4 mt-4">
                 {/* Labels */}
                 <div className="col-span-1">
-                  <p className="text-right">Wanted</p>
+                  <p className="text-right opacity-60">Wanted</p>
                 </div>
 
                 {/* Wanted Bar */}
@@ -222,7 +222,7 @@ const Result = ({ score, handleReset }) => {
               <div className="grid grid-cols-6 items-center gap-4">
                 {/* Labels */}
                 <div className="col-span-1">
-                  <p className="text-right">Expressed</p>
+                  <p className="text-right opacity-60">Expressed</p>
                 </div>
 
                 {/* Expressed Bar */}
@@ -240,7 +240,7 @@ const Result = ({ score, handleReset }) => {
               <div className="grid grid-cols-6 items-center gap-4 mt-4">
                 {/* Labels */}
                 <div className="col-span-1">
-                  <p className="text-right">Wanted</p>
+                  <p className="text-right opacity-60">Wanted</p>
                 </div>
 
                 {/* Wanted Bar */}
@@ -264,7 +264,7 @@ const Result = ({ score, handleReset }) => {
               <div className="grid grid-cols-6 items-center gap-4">
                 {/* Labels */}
                 <div className="col-span-1">
-                  <p className="text-right">Expressed</p>
+                  <p className="text-right opacity-60">Expressed</p>
                 </div>
 
                 {/* Expressed Bar */}
@@ -282,7 +282,7 @@ const Result = ({ score, handleReset }) => {
               <div className="grid grid-cols-6 items-center gap-4 mt-4">
                 {/* Labels */}
                 <div className="col-span-1">
-                  <p className="text-right">Wanted</p>
+                  <p className="text-right opacity-60">Wanted</p>
                 </div>
 
                 {/* Wanted Bar */}
@@ -306,7 +306,7 @@ const Result = ({ score, handleReset }) => {
               <div className="grid grid-cols-6 items-center gap-4">
                 {/* Labels */}
                 <div className="col-span-1">
-                  <p className="text-right">Sensory Impact</p>
+                  <p className="text-right opacity-60">Sensory Impact</p>
                 </div>
 
                 {/* Expressed Bar */}
