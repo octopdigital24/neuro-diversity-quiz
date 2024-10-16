@@ -181,7 +181,7 @@ const Quiz = () => {
 
   if (!hasStarted) {
     return (
-      <div>
+      <div className="px-5 md:px-0">
         <PatientInfo
           patientData={patientData}
           setPatientData={setPatientData}
@@ -195,7 +195,7 @@ const Quiz = () => {
   return (
     <div className="pb-16">
       <div>
-        <div className="max-w-screen-sm mx-auto">
+        <div className="max-w-screen-sm mx-auto ">
           {questions.length === 0 ? (
             <p>Loading questions...</p>
           ) : (

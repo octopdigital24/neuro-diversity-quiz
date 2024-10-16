@@ -49,7 +49,7 @@ const Navbar = () => {
 
   return (
     <div className="shadow-md mb-10">
-      <div className="py-2 max-w-screen-lg mx-auto flex justify-between items-center">
+      <div className="py-2 max-w-screen-lg mx-auto flex justify-between items-center px-5 lg:px-0">
         {/* Logo */}
         <div>
           <img src={logo} className="h-16" alt="Logo" />
@@ -113,11 +113,11 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden absolute top-16 right-4 w-1/2 max-h-[70vh]  overflow-y-auto bg-gray-200  shadow-lg rounded-md ${
+          className={`md:hidden absolute top-16 right-4 w-1/2 sm:w-2/3 max-h-[70vh]  overflow-y-auto bg-white border shadow-2xl rounded-md ${
             isOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="w-full flex flex-col items-start space-y-4 p-4 divide-y divide-gray-300 ">
+          <ul className="w-full flex flex-col items-start space-y-4 p-4 divide-y  ">
             {navLinks.map((link, index) => (
               <li key={index} className="w-full">
                 <a
