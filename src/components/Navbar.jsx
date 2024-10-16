@@ -113,7 +113,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden absolute top-16 right-4 w-1/2 sm:w-2/3 max-h-[70vh]  overflow-y-auto bg-white border shadow-2xl rounded-md ${
+          className={`md:hidden absolute top-16 right-4 w-1/2 sm:w-2/3 max-h-[70vh]  overflow-y-auto bg-white border shadow-2xl rounded-md z-50 ${
             isOpen ? "block" : "hidden"
           }`}
         >
