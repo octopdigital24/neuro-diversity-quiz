@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 const Result = ({ score, handleReset }) => {
+  const nodeEnv = process.env.NODE_ENV;
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top-left corner of the window
   }, []);
@@ -164,12 +165,14 @@ const Result = ({ score, handleReset }) => {
             <p className="p-6 text-center text-xl font-medium">{score.SI}</p>
           </div>
         </div>
-        <button
-          onClick={handleReset}
-          className="bg-indigo-500 text-white px-4 py-2 rounded-md  h-12"
-        >
-          Try Again
-        </button>
+        {nodeEnv === "development" && (
+          <button
+            onClick={handleReset}
+            className="bg-indigo-500 text-white px-4 py-2 rounded-md  h-12"
+          >
+            Try Again
+          </button>
+        )}
       </div>
 
       {/* Graph Section */}
