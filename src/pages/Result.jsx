@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
 
 const Result = ({ score, handleReset }) => {
+  const nodeEnv = process.env.NODE_ENV;
+
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top-left corner of the window
   }, []);
 
   return (
     <div className="">
-      <div className="space-y-3 grid grid-cols-1 max-w-screen-lg mx-auto">
-        <h2 className="text-2xl font-bold text-center mb-6">Your Scores</h2>
+      <div className="space-y-3 grid grid-cols-1 w-[1024px] mx-auto overflow-x-auto px-5">
+        <h2 className="text-2xl font-bold lg:text-center mb-6">Your Scores</h2>
 
         {/* Row 1 */}
-        <div className="flex relative w-full">
+        <div className="flex relative w-full ml-6 lg:ml-2">
           <p className="-rotate-90 absolute top-1/2  right-[97%] font-bold text-green-500">
             EXPRESSED
           </p>
@@ -71,7 +73,7 @@ const Result = ({ score, handleReset }) => {
 
         {/* Row 2 */}
 
-        <div className="flex relative">
+        <div className="flex relative  ml-6 lg:ml-2">
           <p className="-rotate-90 absolute top-1/2  right-[98.5%] text-purple-500 font-bold">
             WANTED
           </p>
@@ -107,7 +109,7 @@ const Result = ({ score, handleReset }) => {
         </div>
 
         {/* Row 3 */}
-        <div className="flex relative">
+        <div className="flex relative  ml-6 lg:ml-2">
           <div className="grid grid-cols-4 gap-3 w-full">
             <div className="border rounded-lg overflow-hidden">
               <p className="bg-blue-500 text-white p-3 text-center">
@@ -164,16 +166,18 @@ const Result = ({ score, handleReset }) => {
             <p className="p-6 text-center text-xl font-medium">{score.SI}</p>
           </div>
         </div>
-        <button
-          onClick={handleReset}
-          className="bg-indigo-500 text-white px-4 py-2 rounded-md  h-12"
-        >
-          Try Again
-        </button>
+        {nodeEnv === "development" && (
+          <button
+            onClick={handleReset}
+            className="bg-indigo-500 text-white px-4 py-2 rounded-md  h-12"
+          >
+            Try Again
+          </button>
+        )}
       </div>
 
       {/* Graph Section */}
-      <div className="py-16 max-w-screen-lg mx-auto">
+      <div className="py-16 max-w-screen-lg mx-auto px-5 lg:px-0 ">
         <div className="py-16 max-w-screen-lg mx-auto space-y-16">
           <div className="grid grid-cols-1 gap-4">
             {/* Social Inclusion section */}
