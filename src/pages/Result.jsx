@@ -181,12 +181,12 @@ const Result = ({ score, handleReset }) => {
               {/* Graph container */}
               <div className="grid grid-cols-6 items-center gap-4">
                 {/* Labels */}
-                <div className="col-span-1">
+                <div className="col-span-1 ">
                   <p className="text-right opacity-60">Expressed</p>
                 </div>
 
                 {/* Expressed Bar */}
-                <div className="col-span-5 flex items-center gap-2">
+                <div className="ml-5 md:ml-0 col-span-5 ml-5 md:ml-0  flex items-center gap-2">
                   <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-orange-500"
@@ -205,7 +205,7 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Wanted Bar */}
-                <div className="col-span-5 flex items-center gap-2">
+                <div className="ml-5 md:ml-0  col-span-5 ml-5 md:ml-0  flex items-center gap-2">
                   <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-blue-500"
@@ -230,7 +230,7 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Expressed Bar */}
-                <div className="col-span-5 flex items-center gap-2">
+                <div className="ml-5 md:ml-0  col-span-5 ml-5 md:ml-0  flex items-center gap-2">
                   <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-orange-500"
@@ -249,7 +249,7 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Wanted Bar */}
-                <div className="col-span-5 flex items-center gap-2">
+                <div className="col-span-5 ml-5 md:ml-0  flex items-center gap-2">
                   <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-blue-500"
@@ -274,7 +274,7 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Expressed Bar */}
-                <div className="col-span-5 flex items-center gap-2">
+                <div className="col-span-5 ml-5 md:ml-0  flex items-center gap-2">
                   <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-orange-500"
@@ -293,7 +293,7 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Wanted Bar */}
-                <div className="col-span-5 flex items-center gap-2">
+                <div className="col-span-5 ml-5 md:ml-0  flex items-center gap-2">
                   <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-blue-500"
@@ -318,7 +318,7 @@ const Result = ({ score, handleReset }) => {
                 </div>
 
                 {/* Expressed Bar */}
-                <div className="col-span-5 flex items-center gap-2">
+                <div className="col-span-5 ml-5 md:ml-0  flex items-center gap-2">
                   <div className="w-full relative h-10 bg-gray-200 rounded overflow-hidden">
                     <div
                       className="absolute top-0 left-0 h-full bg-orange-500"
