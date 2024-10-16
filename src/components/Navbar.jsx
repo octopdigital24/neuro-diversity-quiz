@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../assets/neurodiversity-logo-black.png";
 import transparency from "../assets/platinum-transparency-2024.png";
 
@@ -46,9 +46,27 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
+
+  const navbarRef = useRef(null); // Reference to the navbar
+
+  // Close navbar if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      console.log("clicked outside of navbar");
+      // If click is outside the navbar and the navbar is open, close it
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [navbarRef]);
   console.log("isOpen", isOpen);
   return (
-    <div className="shadow-md mb-10">
+    <div ref={navbarRef} className="shadow-md mb-10">
       <div className="py-2 max-w-screen-lg mx-auto flex justify-between items-center px-5 lg:px-0">
         {/* Logo */}
         <div>
@@ -113,7 +131,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden absolute top-16 right-4 w-1/2 sm:w-2/3 max-h-[90vh]  overflow-y-auto bg-white border shadow-2xl rounded-md z-50 ${
+          className={`md:hidden absolute top-16 right-4 w-3/5 sm:w-1/3 max-h-[90vh]  overflow-y-auto bg-white border shadow-2xl rounded-md z-50 ${
             isOpen ? "block" : "hidden"
           }`}
         >
@@ -141,7 +159,9 @@ const Navbar = () => {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className={`  ${selected ? " rotate-180" : "rotate-0"}`}
+                      className={` transition duration-200 ${
+                        selected === link.label ? " -rotate-180" : "-rotate-0"
+                      }`}
                     >
                       <path d="m6 9 6 6 6-6" />
                     </svg>
@@ -149,20 +169,27 @@ const Navbar = () => {
                 </p>
                 {link.submenus && (
                   <ul
-                    className={`pl-4 transition-transform duration-200 ${
+                    className={`pl-4 transition-all duration-300 ease-in-out ${
                       selected === link.label
-                        ? "max-h-auto"
-                        : "h-0 overflow-hidden"
+                        ? "max-h-[500px] opacity-100" // Set large max-height and full opacity when open
+                        : "max-h-0 opacity-0 overflow-hidden" // Collapse the submenu and hide when closed
                     }`}
+                    style={{
+                      transitionProperty: "max-height, opacity", // Apply both max-height and opacity transitions
+                    }}
                   >
                     {link.submenus.map((submenu, subIndex) => (
                       <li key={subIndex}>
-                        <p
+                        <a
                           href={submenu.url}
-                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                          className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-opacity duration-300 ease-in-out ${
+                            selected === link.label
+                              ? "opacity-100"
+                              : "opacity-0"
+                          }`}
                         >
                           {submenu.label}
-                        </p>
+                        </a>
                       </li>
                     ))}
                   </ul>
