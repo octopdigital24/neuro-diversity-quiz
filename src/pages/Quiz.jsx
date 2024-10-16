@@ -114,6 +114,7 @@ const Quiz = () => {
               break;
             case "Dietary Habits":
               newScore.SI += value;
+              break;
             default:
               console.warn(`Unrecognized section: ${sectionName}`);
           }
@@ -124,6 +125,7 @@ const Quiz = () => {
     });
 
     setScore(newScore);
+    setShowResults(true);
   };
 
   const handleSubmit = async (e) => {
