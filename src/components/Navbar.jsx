@@ -117,12 +117,12 @@ const Navbar = () => {
             isOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="w-full flex flex-col items-start  p-4 my-2 divide-y  ">
+          <ul className="w-full flex flex-col items-start  p-4  divide-y  ">
             {navLinks.map((link, index) => (
               <li key={index} className="w-full">
                 <p
                   // href={link.url}
-                  className="text-gray-900 w-full px-4 py-2 hover:bg-gray-200 rounded-md flex justify-between items-center"
+                  className="text-gray-900 w-full p-4  hover:bg-gray-200 rounded-md flex justify-between items-center"
                   onClick={() =>
                     selected === link.label
                       ? setSelected("")
@@ -169,7 +169,7 @@ const Navbar = () => {
                 )}
               </li>
             ))}
-            <button className="py-2 px-3 w-full bg-blue-500 hover:bg-blue-600 transition-colors duration-200 active:scale-95 text-white rounded-full">
+            <button className="py-2 px-3 mt-6 w-full bg-blue-500 hover:bg-blue-600 transition-colors duration-200 active:scale-95 text-white rounded-full">
               Donate
             </button>
           </ul>
