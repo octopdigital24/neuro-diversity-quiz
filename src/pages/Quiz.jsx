@@ -195,7 +195,7 @@ const Quiz = () => {
   return (
     <div className="pb-16">
       <div>
-        <div className="max-w-screen-sm mx-auto ">
+        <div className="max-w-screen-sm md:mx-auto mx-5  ">
           {questions.length === 0 ? (
             <p>Loading questions...</p>
           ) : (
