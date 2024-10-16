@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Result = ({ score, handleReset }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top-left corner of the window
+  }, []);
+
   return (
     <div className="">
       <div className="space-y-3 grid grid-cols-1 max-w-screen-lg mx-auto">
