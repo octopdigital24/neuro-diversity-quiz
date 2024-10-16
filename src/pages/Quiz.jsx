@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import PatientInfo from "./PatientInfo";
 import Result from "./Result";
+import { quizData } from "./quiz-data";
 
 const Quiz = () => {
   const nodeEnv = process.env.NODE_ENV;
   const [hasStarted, setHasStarted] = useState(false);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(quizData);
   const [responses, setResponses] = useState({});
   const [errors, setErrors] = useState({});
   const [patientData, setPatientData] = useState({
@@ -23,21 +24,6 @@ const Quiz = () => {
   });
   const [showResults, setShowResults] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-
-  // Load questions from the Express server
-  useEffect(() => {
-    fetch("http://localhost:5005/quiz-data") // Ensure this matches your Express endpoint
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setQuestions(data); // Assuming the API returns an array of questions
-      })
-      .catch((error) => console.error("Error fetching quiz data:", error));
-  }, []);
 
   const handleResponseChange = (questionId, response) => {
     // Update the responses state with the new response for the given questionId
@@ -143,28 +129,28 @@ const Quiz = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     calculateScore();
-    try {
-      console.log("Triggered");
-      setSubmitting(true);
-      const response = await fetch("http://localhost:5005/user-score", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: patientData.name,
-          email: patientData.email,
-          score,
-        }),
-      });
-      if (response.status === 200) {
-        setShowResults(true);
-      }
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setSubmitting(false);
-    }
+    // try {
+    //   console.log("Triggered");
+    //   setSubmitting(true);
+    //   const response = await fetch("http://localhost:5005/user-score", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       name: patientData.name,
+    //       email: patientData.email,
+    //       score,
+    //     }),
+    //   });
+    //   if (response.status === 200) {
+    //     setShowResults(true);
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    // } finally {
+    //   setSubmitting(false);
+    // }
   };
 
   const answerAllQuestionsRandomly = () => {
