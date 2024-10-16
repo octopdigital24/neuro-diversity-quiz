@@ -46,7 +46,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
-
+  console.log("isOpen", isOpen);
   return (
     <div className="shadow-md mb-10">
       <div className="py-2 max-w-screen-lg mx-auto flex justify-between items-center px-5 lg:px-0">
@@ -83,22 +83,22 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-4">
           {navLinks.map((link, index) => (
             <div key={index} className="group relative">
-              <a
-                href={link.url}
+              <p
+                // href={link.url}
                 className="text-gray-900 group-hover:bg-[#FF5300] hover:text-white px-2 py-1 rounded-md transition-colors duration-200"
               >
                 {link.label}
-              </a>
+              </p>
               {link.submenus && (
                 <ul className="absolute left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-md p-2">
                   {link.submenus.map((submenu, subIndex) => (
                     <li key={subIndex}>
-                      <a
-                        href={submenu.url}
+                      <p
+                        // href={submenu.url}
                         className="block px-4 py-2 text-gray-700 hover:text-gray-900"
                       >
                         {submenu.label}
-                      </a>
+                      </p>
                     </li>
                   ))}
                 </ul>
@@ -113,17 +113,21 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden absolute top-16 right-4 w-1/2 sm:w-2/3 max-h-[70vh]  overflow-y-auto bg-white border shadow-2xl rounded-md z-50 ${
+          className={`md:hidden absolute top-16 right-4 w-1/2 sm:w-2/3 max-h-[90vh]  overflow-y-auto bg-white border shadow-2xl rounded-md z-50 ${
             isOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="w-full flex flex-col items-start space-y-4 p-4 divide-y  ">
+          <ul className="w-full flex flex-col items-start  p-4 my-2 divide-y  ">
             {navLinks.map((link, index) => (
               <li key={index} className="w-full">
-                <a
-                  href={link.url}
+                <p
+                  // href={link.url}
                   className="text-gray-900 w-full px-4 py-2 hover:bg-gray-200 rounded-md flex justify-between items-center"
-                  onClick={() => setSelected(link.label)}
+                  onClick={() =>
+                    selected === link.label
+                      ? setSelected("")
+                      : setSelected(link.label)
+                  }
                 >
                   {link.label}{" "}
                   {link.submenus && (
@@ -142,17 +146,23 @@ const Navbar = () => {
                       <path d="m6 9 6 6 6-6" />
                     </svg>
                   )}
-                </a>
-                {link.submenus && selected === link.label && (
-                  <ul className="pl-4">
+                </p>
+                {link.submenus && (
+                  <ul
+                    className={`pl-4 transition-transform duration-200 ${
+                      selected === link.label
+                        ? "max-h-auto"
+                        : "h-0 overflow-hidden"
+                    }`}
+                  >
                     {link.submenus.map((submenu, subIndex) => (
                       <li key={subIndex}>
-                        <a
+                        <p
                           href={submenu.url}
                           className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                         >
                           {submenu.label}
-                        </a>
+                        </p>
                       </li>
                     ))}
                   </ul>
