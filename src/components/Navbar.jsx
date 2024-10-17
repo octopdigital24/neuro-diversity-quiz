@@ -108,7 +108,7 @@ const Navbar = () => {
                 {link.label}
               </p>
               {link.submenus && (
-                <ul className="absolute left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-md p-2">
+                <ul className="absolute left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-md p-2 w-fit">
                   {link.submenus.map((submenu, subIndex) => (
                     <li key={subIndex}>
                       <p
