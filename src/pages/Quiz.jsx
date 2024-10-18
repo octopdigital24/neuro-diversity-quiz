@@ -286,7 +286,7 @@ const Quiz = () => {
             <div className="w-full flex justify-end gap-2">
               {nodeEnv === "development" && (
                 <button
-                  onClick={answerAllQuestionsRandomly}
+                  onClick={answerAllQuestionsRandomly()}
                   className="p-3 mt-4 bg-green-600 hover:bg-green-700 transition-colors duration-200 rounded-md text-white min-w-32"
                 >
                   Answer all questions
